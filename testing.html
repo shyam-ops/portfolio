@@ -10,6 +10,22 @@
   <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 
   <style>
+
+
+.reveal {   
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+} 
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
     :root{
       --bg:#030308;
       --card:#0b0b12;
@@ -128,6 +144,22 @@
   <div class="container">
     <!-- LEFT: PROFILE -->
     <style>
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
   .glow-image {
     width: 600px;
     height: 180px;
@@ -155,6 +187,24 @@
 </style>
 
 <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
   .profile-photo {
     width: 100%;
     height: 600px;
@@ -173,6 +223,24 @@
 <div class="container">
   <!-- LEFT: PROFILE -->
   <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
   .profile-card {
     position: relative;
     z-index: 10; /* ensures the whole card is above background animation */
@@ -202,12 +270,20 @@
     object-fit: cover;
     display: block;
   }
+  .skill:hover {
+  background: #bb00ff;
+  color: white;
+  box-shadow: 0 0 10px #bb00ff;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
 </style>
 
 <aside class="profile-card">
   <!-- Profile Image -->
   <div class="profile-photo">
-    <img src="https://drive.google.com/uc?export=view&id=1PXJDUDTxeYMS8kkntQmeXGovx_ayJSa1" alt="Shyam Vidyadhar Patil">
+    <img src="https://raw.githubusercontent.com/shyam-ops/portfolio/a17909aa318961da3f217b2c58f230e5edc52ead/profile.jpg" alt="Shyam Vidyadhar Patil">
   </div>
 
   <div>
@@ -254,11 +330,11 @@
     <!-- RIGHT: MAIN CONTENT -->
     <main>
       <!-- HERO -->
-      <section class="hero" aria-label="hero">
+      <section class="hero reveal" aria-label="hero">
         <div class="hero-left">
           
 
-          <h1 class="hero-h1" style="margin-top:14px">
+          <h1 class="hero-h1" style="margin-top:14px" id="typed-text">
             Hi, I'm <span class="accent">Shyam Patil</span><br>
             I turn data into stories &amp; dashboards.
           </h1>
@@ -274,6 +350,23 @@
 
         <div class="glow-lines" aria-hidden="true"></div>
     <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
   @media (max-width: 768px) {
     .hero {
       display: flex;
@@ -293,7 +386,7 @@
       </section>
 
       <!-- ABOUT & PROJECTS -->
-      <section class="card" style="display:flex;gap:18px;flex-direction:column;">
+      <section class="card reveal" style="display:flex;gap:18px;flex-direction:column;">
         <div class="section-title">
           <div class="p-pill">About</div>
           <div style="color:var(--muted);font-size:13px">Short bio</div>
@@ -397,7 +490,7 @@
             <div style="width:8px;height:8px;border-radius:4px;background:var(--accent);margin-top:8px"></div>
             <div>
               <strong>Data Analyst Intern — Gray Corporates</strong>
-              <div class="muted">May–June 2024 — Advanced SQL queries and automated reporting (40% time saved).</div>
+              <div class="muted">May–June 2025 — Advanced SQL queries and automated reporting (40% time saved).</div>
             </div>
           </div>
         </div>
@@ -573,5 +666,36 @@
     })();
   </script><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas>
 
+<script>// scrolling animation
+  const reveals = document.querySelectorAll(".reveal");
 
-</body></html>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach((section) => {
+    observer.observe(section);
+  });
+</script>
+
+<script>
+  const text = "Hi, I'm Shyam Patil\nI turn data into stories & dashboards.";
+  let index = 0;
+  function type() {
+    document.getElementById("typed-text").innerHTML = text.slice(0, index);
+    index++;
+    if (index <= text.length) {
+      setTimeout(type, 50);
+    }
+  }
+  type();
+  </script>
+  
+
+</body>
+</html>

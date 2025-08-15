@@ -120,45 +120,136 @@
     /* small utilities */
     .muted{color:var(--muted);font-size:13px}
     a.text-accent{color:var(--accent);text-decoration:none;font-weight:600}
+
+    
   </style>
 </head>
 <body>
   <div class="container">
     <!-- LEFT: PROFILE -->
-    <aside class="profile-card">
-      <div style="display:flex;gap:16px;align-items:center">
-        <div class="avatar" aria-hidden="true">SVP</div>
-        <div>
-          <div class="name">Shyam Vidyadhar Patil</div>
-          <div class="title">Data Analyst • SQL • Python • Power BI • Excel</div>
-          <div class="badge">B.Tech — AI &amp; Data Science</div>
-        </div>
-      </div>
+    <style>
+  .glow-image {
+    width: 600px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #bb00ff; /* Neon purple border */
+    box-shadow: 0 0 20px #bb00ff, 0 0 40px #bb00ff80, 0 0 60px #bb00ff40;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-      <div class="contact">
-        <div style="margin-top:12px"><strong>Email:</strong> <a href="mailto:shyamvidyadharpatil1234@gmail.com">shyamvidyadharpatil1234@gmail.com</a></div>
-        <div style="margin-top:6px"><strong>Location:</strong> Nagpur, Maharashtra</div>
-        <div style="margin-top:6px"><strong>Phone:</strong> +91 9322943671</div>
-        <div style="margin-top:6px"><strong>LinkedIn:</strong> <a class="text-accent" href="https://linkedin.com/in/shyam-patil-22654a206" target="_blank" rel="noopener">linkedin.com/in/shyam-patil-22654a206</a></div>
-        <div style="margin-top:6px"><strong>GitHub:</strong> <a class="text-accent" href="https://github.com/shyam-ops" target="_blank" rel="noopener">github.com/shyam-ops</a></div>
-      </div>
+  .glow-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #bb00ff, 0 0 60px #bb00ff80, 0 0 90px #bb00ff40;
+    animation: pulse-glow 1.5s infinite alternate;
+  }
 
-      <div class="skills" aria-label="Key skills">
-        <div class="skill">SQL</div>
-        <div class="skill">Python</div>
-        <div class="skill">Power BI</div>
-        <div class="skill">Excel</div>
-        <div class="skill">Data Viz</div>
-        <div class="skill">ETL</div>
-      </div>
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 20px #bb00ff, 0 0 40px #bb00ff80, 0 0 60px #bb00ff40;
+    }
+    100% {
+      box-shadow: 0 0 30px #bb00ff, 0 0 60px #bb00ff80, 0 0 90px #bb00ff40;
+    }
+  }
+</style>
 
-      <!-- download resume -->
-      <a class="download-btn" href="https://drive.google.com/file/d/1V5vaeimm4m6YC-6HmDkSCWxjkU1YRlRA/view?usp=sharing" target="_blank" download="">
-        Download Resume
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.95"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </a>
+<style>
+  .profile-photo {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
 
-    </aside>
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container">
+  <!-- LEFT: PROFILE -->
+  <style>
+  .profile-card {
+    position: relative;
+    z-index: 10; /* ensures the whole card is above background animation */
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 3px solid #bb00ff; /* Neon purple border */
+    box-shadow: 0 0 20px rgba(187, 0, 255, 0.6); /* Soft glow */
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 11; /* ensures image stays above background effects */
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(187, 0, 255, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(187, 0, 255, 0.9); }
+    100% { box-shadow: 0 0 15px rgba(187, 0, 255, 0.5); }
+  }
+
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+
+<aside class="profile-card">
+  <!-- Profile Image -->
+  <div class="profile-photo">
+    <img src="https://raw.githubusercontent.com/shyam-ops/portfolio/a17909aa318961da3f217b2c58f230e5edc52ead/profile.jpg" alt="Shyam Vidyadhar Patil">
+  </div>
+
+  <div>
+    <div class="name">Shyam Vidyadhar Patil</div>
+    <div class="title">Data Analyst • SQL • Python • Power BI • Excel</div>
+    <div class="badge">B.Tech — AI &amp; Data Science</div>
+  </div>
+
+  <div class="contact">
+    <div style="margin-top:12px"><strong>Email:</strong> <a href="mailto:shyamvidyadharpatil1234@gmail.com">shyamvidyadharpatil1234@gmail.com</a></div>
+    <div style="margin-top:6px"><strong>Location:</strong> Nagpur, Maharashtra</div>
+    <div style="margin-top:6px"><strong>Phone:</strong> +91 9322943671</div>
+    <div style="margin-top:6px"><strong>LinkedIn:</strong> <a class="text-accent" href="https://linkedin.com/in/shyam-patil-22654a206" target="_blank" rel="noopener">linkedin.com/in/shyam-patil-22654a206</a></div>
+    <div style="margin-top:6px"><strong>GitHub:</strong> <a class="text-accent" href="https://github.com/shyam-ops" target="_blank" rel="noopener">github.com/shyam-ops</a></div>
+  </div>
+
+  <div class="skills" aria-label="Key skills">
+    <div class="skill">SQL</div>
+    <div class="skill">Python</div>
+    <div class="skill">Power BI</div>
+    <div class="skill">Excel</div>
+    <div class="skill">Data Viz</div>
+    <div class="skill">ETL</div>
+  </div>
+
+  <!-- download resume -->
+  <a class="download-btn" href="https://drive.google.com/file/d/1V5vaeimm4m6YC-6HmDkSCWxjkU1YRlRA/view?usp=sharing" target="_blank" download="">
+    Download Resume
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.95">
+      <path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</aside>
+
+
+  <!-- RIGHT: MAIN CONTENT -->
+  <!-- Your existing main content remains unchanged -->
+</div>
+
+
 
     <!-- RIGHT: MAIN CONTENT -->
     <main>
@@ -182,6 +273,23 @@
         </div>
 
         <div class="glow-lines" aria-hidden="true"></div>
+    <style>
+  @media (max-width: 768px) {
+    .hero {
+      display: flex;
+      overflow: auto; /* enables both horizontal & vertical scroll */
+      -webkit-overflow-scrolling: touch;
+      max-height: 100vh;
+    }
+
+    .hero-left,
+    .canvas-wrap {
+      flex: 0 0 auto; /* prevent shrinking horizontally */
+      white-space: normal; /* allow paragraph text to wrap */
+    }
+  }
+</style>
+
       </section>
 
       <!-- ABOUT & PROJECTS -->
@@ -463,7 +571,8 @@
       particlesAnim();
 
     })();
-  </script><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas>
+  </script><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas>
 
-
-</body></html>
+  
+</body>
+</html>
