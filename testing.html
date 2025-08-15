@@ -1,0 +1,577 @@
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shyam Vidyadhar Patil — Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+
+  <!-- Three.js CDN -->
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#030308;
+      --card:#0b0b12;
+      --accent:#8b5cf6; /* neon purple */
+      --accent-2:#5b21b6;
+      --muted:#9aa0b3;
+      --glass: rgba(255,255,255,0.04);
+      --glow: 0 0 24px rgba(139,92,246,0.25), 0 0 64px rgba(139,92,246,0.12);
+      --radius:16px;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(91,33,182,0.08), transparent),
+                  radial-gradient(900px 400px at 90% 90%, rgba(139,92,246,0.06), transparent),
+                  var(--bg);
+      color:#e6e7ee;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
+    }
+
+    /* Layout */
+    .container{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+    @media (max-width:980px){.container{grid-template-columns:1fr; padding: 18px}}
+
+    /* Left column (profile) */
+    .profile-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow: var(--glow);
+      border:1px solid rgba(139,92,246,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .avatar{
+      height:96px;width:96px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      font-weight:800;font-size:32px;color:white;box-shadow: 0 6px 30px rgba(91,33,182,0.28), inset 0 -6px 24px rgba(255,255,255,0.04);
+    }
+    .name{font-size:20px;font-weight:700;margin-top:14px}
+    .title{font-size:13px;color:var(--muted);margin-top:6px}
+    .badge{display:inline-block;margin-top:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(139,92,246,0.18), rgba(91,33,182,0.08));color:var(--accent);font-weight:600;font-size:12px;border:1px solid rgba(139,92,246,0.06)}
+
+    .contact{margin-top:18px;font-size:13px;color:var(--muted)}
+    .contact a{color:inherit;text-decoration:none}
+    .skills{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:var(--glass);padding:8px 10px;border-radius:10px;font-size:13px;color:#cfcff6;border:1px solid rgba(255,255,255,0.02)}
+    .download-btn{
+      display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;font-weight:600;border:none;cursor:pointer;box-shadow: 0 10px 30px rgba(91,33,182,0.18);
+      text-decoration:none;
+    }
+
+    /* Right column (content) */
+    .hero{
+      height:360px;border-radius:var(--radius);position:relative;overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.02);box-shadow: var(--glow);
+      display:flex;align-items:center;gap:24px;padding:26px;
+    }
+    .hero-left{flex:1;z-index:2}
+    .hero-h1{font-size:30px;font-weight:800;line-height:1.02}
+    .hero-h1 .accent{color:var(--accent);text-shadow: 0 0 8px rgba(139,92,246,0.9)}
+    .hero-sub{color:var(--muted);margin-top:10px}
+
+    /* 3D Canvas wrapper */
+    .canvas-wrap{width:360px;height:260px;border-radius:12px;overflow:hidden;flex-shrink:0;
+      border:1px solid rgba(139,92,246,0.06);box-shadow: 0 20px 70px rgba(91,33,182,0.12);background:transparent;display:flex;align-items:center;justify-content:center}
+    /* overlay glow lines */
+    .glow-lines{position:absolute;inset:0;pointer-events:none;background-image:
+       linear-gradient(180deg, rgba(139,92,246,0.02) 1px, transparent 1px),
+       linear-gradient(90deg, rgba(91,33,182,0.02) 1px, transparent 1px);
+       background-size: 100% 80px, 80px 100%;
+       mix-blend-mode: screen;
+    }
+
+    /* Section cards */
+    .card{background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border-radius:14px;padding:18px;margin-top:20px;border:1px solid rgba(255,255,255,0.02);box-shadow: 0 8px 30px rgba(11,11,18,0.6)}
+    .section-title{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:12px}
+    .p-pill{background:rgba(139,92,246,0.08);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px;border:1px solid rgba(139,92,246,0.04)}
+
+    /* Project grid */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    @media (max-width:980px){.projects{grid-template-columns:1fr}}
+    .proj{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      padding:14px;border-radius:12px;border:1px solid rgba(139,92,246,0.04);
+      transition:transform .28s ease, box-shadow .28s ease;
+      cursor:default;
+    }
+    .proj:hover{transform:translateY(-8px);box-shadow: 0 30px 80px rgba(91,33,182,0.12)}
+    .proj h4{margin:0 0 8px 0}
+    .tech{font-size:12px;color:var(--muted);margin-top:8px}
+
+    /* Certifications list */
+    .cert-list{display:flex;flex-direction:column;gap:10px}
+    .cert{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(90deg, rgba(139,92,246,0.02), transparent);border:1px solid rgba(139,92,246,0.03)}
+
+    /* Footer / Contact */
+    .contact-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+    .contact-chip{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;font-size:13px;border:1px solid rgba(255,255,255,0.02)}
+
+    /* small utilities */
+    .muted{color:var(--muted);font-size:13px}
+    a.text-accent{color:var(--accent);text-decoration:none;font-weight:600}
+
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- LEFT: PROFILE -->
+    <style>
+  .glow-image {
+    width: 600px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #bb00ff; /* Neon purple border */
+    box-shadow: 0 0 20px #bb00ff, 0 0 40px #bb00ff80, 0 0 60px #bb00ff40;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .glow-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #bb00ff, 0 0 60px #bb00ff80, 0 0 90px #bb00ff40;
+    animation: pulse-glow 1.5s infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 20px #bb00ff, 0 0 40px #bb00ff80, 0 0 60px #bb00ff40;
+    }
+    100% {
+      box-shadow: 0 0 30px #bb00ff, 0 0 60px #bb00ff80, 0 0 90px #bb00ff40;
+    }
+  }
+</style>
+
+<style>
+  .profile-photo {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container">
+  <!-- LEFT: PROFILE -->
+  <style>
+  .profile-card {
+    position: relative;
+    z-index: 10; /* ensures the whole card is above background animation */
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 3px solid #bb00ff; /* Neon purple border */
+    box-shadow: 0 0 20px rgba(187, 0, 255, 0.6); /* Soft glow */
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 11; /* ensures image stays above background effects */
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(187, 0, 255, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(187, 0, 255, 0.9); }
+    100% { box-shadow: 0 0 15px rgba(187, 0, 255, 0.5); }
+  }
+
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+
+<aside class="profile-card">
+  <!-- Profile Image -->
+  <div class="profile-photo">
+    <img src="https://drive.google.com/uc?export=view&id=1PXJDUDTxeYMS8kkntQmeXGovx_ayJSa1" alt="Shyam Vidyadhar Patil">
+  </div>
+
+  <div>
+    <div class="name">Shyam Vidyadhar Patil</div>
+    <div class="title">Data Analyst • SQL • Python • Power BI • Excel</div>
+    <div class="badge">B.Tech — AI &amp; Data Science</div>
+  </div>
+
+  <div class="contact">
+    <div style="margin-top:12px"><strong>Email:</strong> <a href="mailto:shyamvidyadharpatil1234@gmail.com">shyamvidyadharpatil1234@gmail.com</a></div>
+    <div style="margin-top:6px"><strong>Location:</strong> Nagpur, Maharashtra</div>
+    <div style="margin-top:6px"><strong>Phone:</strong> +91 9322943671</div>
+    <div style="margin-top:6px"><strong>LinkedIn:</strong> <a class="text-accent" href="https://linkedin.com/in/shyam-patil-22654a206" target="_blank" rel="noopener">linkedin.com/in/shyam-patil-22654a206</a></div>
+    <div style="margin-top:6px"><strong>GitHub:</strong> <a class="text-accent" href="https://github.com/shyam-ops" target="_blank" rel="noopener">github.com/shyam-ops</a></div>
+  </div>
+
+  <div class="skills" aria-label="Key skills">
+    <div class="skill">SQL</div>
+    <div class="skill">Python</div>
+    <div class="skill">Power BI</div>
+    <div class="skill">Excel</div>
+    <div class="skill">Data Viz</div>
+    <div class="skill">ETL</div>
+  </div>
+
+  <!-- download resume -->
+  <a class="download-btn" href="https://drive.google.com/file/d/1V5vaeimm4m6YC-6HmDkSCWxjkU1YRlRA/view?usp=sharing" target="_blank" download="">
+    Download Resume
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.95">
+      <path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</aside>
+
+
+  <!-- RIGHT: MAIN CONTENT -->
+  <!-- Your existing main content remains unchanged -->
+</div>
+
+
+
+    <!-- RIGHT: MAIN CONTENT -->
+    <main>
+      <!-- HERO -->
+      <section class="hero" aria-label="hero">
+        <div class="hero-left">
+          
+
+          <h1 class="hero-h1" style="margin-top:14px">
+            Hi, I'm <span class="accent">Shyam Patil</span><br>
+            I turn data into stories &amp; dashboards.
+          </h1>
+          <p class="hero-sub">Detail-oriented Data Analyst experienced with SQL, Power BI, Excel and Python — building dashboards, automations, and ETL pipelines that save time and clarify decisions.</p>
+
+          
+        </div>
+
+        <!-- 3D Canvas -->
+        <div class="canvas-wrap" id="canvas-wrap" aria-hidden="true">
+          <canvas id="three-canvas" width="447" height="322" data-engine="three.js r155" style="width: 358px; height: 258px;"></canvas>
+        </div>
+
+        <div class="glow-lines" aria-hidden="true"></div>
+    <style>
+  @media (max-width: 768px) {
+    .hero {
+      display: flex;
+      overflow: auto; /* enables both horizontal & vertical scroll */
+      -webkit-overflow-scrolling: touch;
+      max-height: 100vh;
+    }
+
+    .hero-left,
+    .canvas-wrap {
+      flex: 0 0 auto; /* prevent shrinking horizontally */
+      white-space: normal; /* allow paragraph text to wrap */
+    }
+  }
+</style>
+
+      </section>
+
+      <!-- ABOUT & PROJECTS -->
+      <section class="card" style="display:flex;gap:18px;flex-direction:column;">
+        <div class="section-title">
+          <div class="p-pill">About</div>
+          <div style="color:var(--muted);font-size:13px">Short bio</div>
+        </div>
+        <div style="font-size:14px;color: #e9e9f8;">
+          Detail-oriented Data Analyst experienced with SQL, Power BI, Excel and Python. Skilled at building dashboards, ETL automation, and data storytelling to drive business decisions.
+        </div>
+
+        <div style="display:flex;gap:18px;flex-direction:column;margin-top:18px">
+          <div>
+            <div class="section-title"><div class="p-pill">Projects</div><div class="muted">Selected work</div></div>
+            <div class="projects">
+              <!-- Project 1 -->
+              <div class="proj">
+                <h4>IPL Performance Analytics (SQL)</h4>
+                <div class="muted">Analyzed IPL team &amp; player performance using SQL to extract insights for batting, bowling, and team strategies. Built queries to compute per-match and season-level KPIs.</div>
+                <div class="tech">Tech: SQL, PostgreSQL, data modeling</div>
+              </div>
+
+              <!-- Project 2 -->
+              <div class="proj">
+                <h4>Supply Chain Logistics (SQL)</h4>
+                <div class="muted">Worked on supply chain data to identify bottlenecks and optimized routing using SQL queries and aggregation dashboards to help visualize delays and lead times.</div>
+                <div class="tech">Tech: SQL, ETL, reporting</div>
+              </div>
+
+              <!-- Project 3 -->
+              <div class="proj">
+                <h4>Sales Dashboard (Power BI)</h4>
+                <div class="muted">Designed interactive Power BI dashboards to monitor sales, revenue, and product-level performance. Improved stakeholder visibility and KPI tracking.</div>
+                <div class="tech">Tech: Power BI, DAX, Excel</div>
+              </div>
+
+              <!-- Project 4 - placeholder -->
+              <div class="proj">
+                <h4>Data Automation Scripts</h4>
+                <div class="muted">Automation scripts for cleaning and transforming data using Python and scheduled jobs to reduce manual effort and improve accuracy.</div>
+                <div class="tech">Tech: Python, pandas, scheduling</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-title"><div class="p-pill">Certifications</div><div class="muted">Verified</div></div>
+            <div class="cert-list">
+              <div class="cert"><div class="cert">
+<strong>
+  <a href="https://www.coursera.org/account/accomplishments/verify/AD4AP88LSZGZ" target="_blank" style="color:var(--accent); text-decoration:none;">
+    Python for Data Science, AI &amp; Development
+  </a>
+</strong>
+<div class="muted" style="margin-left:auto">IBM</div>
+</div>
+<div class="muted" style="margin-left:auto">IBM</div></div>
+              <div class="cert"><div class="cert">
+<strong>
+  <a href="https://www.coursera.org/account/accomplishments/verify/B9Y7FXR2NB75" target="_blank" style="color:var(--accent); text-decoration:none;">
+    Python Project for Data Science
+  </a>
+</strong>
+<div class="muted" style="margin-left:auto">IBM</div>
+</div>
+<div class="muted" style="margin-left:auto">IBM</div></div>
+              <div class="cert"><div class="cert">
+<strong>
+  <a href="https://www.coursera.org/account/accomplishments/verify/6EVWP6LZCIJW" target="_blank" style="color:var(--accent); text-decoration:none;">
+    Excel Basics for Data Analysis
+  </a>
+</strong>
+<div class="muted" style="margin-left:auto">IBM</div>
+</div>
+<div class="muted" style="margin-left:auto">IBM</div></div>
+              <div class="cert"><div class="cert">
+<strong>
+  <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_AuLJfyWo2k3moxunZ_1748775971465_completion_certificate.pdf" target="_blank" style="color:var(--accent); text-decoration:none;">
+    Data Analytics Job Simulation
+  </a>
+</strong>
+<div class="muted" style="margin-left:auto">Forage</div>
+</div>
+<div class="muted" style="margin-left:auto">Deloitte Australia (Forage)</div></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Experience / Contact -->
+      <section class="card" style="display:flex;flex-direction:column">
+        <div class="section-title"><div class="p-pill">Experience</div><div class="muted">Internships</div></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:8px;height:8px;border-radius:4px;background:var(--accent);margin-top:8px"></div>
+            <div>
+              <strong>Business Intelligence Intern — Uphill Technologies</strong>
+              <div class="muted">June–July 2024 — Built Power BI dashboards; optimized load time by ~30%.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:8px;height:8px;border-radius:4px;background:var(--accent);margin-top:8px"></div>
+            <div>
+              <strong>Data Analyst Intern — Gray Corporates</strong>
+              <div class="muted">May–June 2024 — Advanced SQL queries and automated reporting (40% time saved).</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div class="section-title"><div class="p-pill">Contact</div><div class="muted">Get in touch</div></div>
+          <div class="contact-row">
+            <a class="contact-chip" href="mailto:shyamvidyadharpatil1234@gmail.com" title="Email">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M4 4h16v16H4z" fill="#fff" fill-opacity="0"></path>
+    <path fill="#EA4335" d="M12 13.5 2 6.75V18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6.75L12 13.5z"></path>
+    <path fill="#EA4335" d="M22 6V6l-10 7L2 6v0l10-7 10 7z"></path>
+  </svg>
+</a>
+
+            <a class="contact-chip" href="https://linkedin.com/in/shyam-patil-22654a206" target="_blank" rel="noopener" title="LinkedIn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.65-1.85 3.39-1.85 3.63 0 4.3 2.39 4.3 5.49v6.25zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path>
+  </svg>
+</a>
+
+            <a class="contact-chip" href="https://github.com/shyam-ops" target="_blank" rel="noopener" title="GitHub">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ffffff">
+    <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.37 7.86 10.88.58.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.54-3.88-1.54-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.52.11-3.17 0 0 .97-.31 3.18 1.18a11.04 11.04 0 0 1 2.9-.39c.99 0 1.99.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.65.23 2.87.11 3.17.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.37.8 1.09.8 2.2 0 1.59-.01 2.87-.01 3.26 0 .3.21.65.8.54A10.997 10.997 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"></path>
+  </svg>
+</a>
+
+            <div class="contact-chip">Nagpur, Maharashtra</div>
+          </div>
+        </div>
+      </section>
+
+      <footer style="margin-top:18px;text-align:center;color:var(--muted);font-size:13px">
+        Built with ❤️ • Neon portfolio • © Shyam Vidyadhar Patil
+      </footer>
+    </main>
+
+  </div>
+
+  <!-- Three.js script (rotating neon torus + subtle post processing) -->
+  <script>
+    (function(){
+      const canvasWrap = document.getElementById('canvas-wrap');
+      const canvas = document.getElementById('three-canvas');
+      const width = canvasWrap.clientWidth;
+      const height = canvasWrap.clientHeight;
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true});
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+
+      // Camera
+      const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 1000);
+      camera.position.z = 3.6;
+
+      // Ambient glow
+      const amb = new THREE.AmbientLight(0x8b5cf6, 0.8);
+      scene.add(amb);
+
+      // Neon torus
+      const geometry = new THREE.TorusKnotGeometry(0.9, 0.28, 128, 24);
+      const mat = new THREE.MeshStandardMaterial({
+        color: 0x8b5cf6,
+        emissive: 0x6b21a8,
+        emissiveIntensity: 1.2,
+        metalness: 0.9,
+        roughness: 0.15,
+        envMapIntensity: 0.6
+      });
+      const torus = new THREE.Mesh(geometry, mat);
+      scene.add(torus);
+
+      // Add rim glow via duplicated mesh with additive blending
+      const glowMat = new THREE.MeshBasicMaterial({color:0x8b5cf6, transparent:true, blending:THREE.AdditiveBlending, opacity:0.18});
+      const glowMesh = new THREE.Mesh(geometry.clone(), glowMat);
+      glowMesh.scale.set(1.08,1.08,1.08);
+      scene.add(glowMesh);
+
+      // subtle point lights
+      const p1 = new THREE.PointLight(0x8b5cf6, 1.4, 10);
+      p1.position.set(2,2,2);
+      scene.add(p1);
+      const p2 = new THREE.PointLight(0x4c1d95, 0.8, 8);
+      p2.position.set(-2,-1,2.5);
+      scene.add(p2);
+
+      // responsive resize
+      function resize(){
+        const w = canvasWrap.clientWidth, h = canvasWrap.clientHeight;
+        renderer.setSize(w, h);
+        camera.aspect = w/h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resize);
+
+      // mouse interactivity (tilt)
+      let mouseX = 0, mouseY = 0;
+      canvasWrap.addEventListener('mousemove', (e)=>{
+        const r = canvasWrap.getBoundingClientRect();
+        mouseX = (e.clientX - r.left) / r.width - 0.5;
+        mouseY = (e.clientY - r.top) / r.height - 0.5;
+      });
+
+      // animate
+      let last = performance.now();
+      function animate(t){
+        const dt = (t-last)/1000; last = t;
+        // gentle rotation + react to mouse
+        torus.rotation.y += 0.35 * dt;
+        torus.rotation.x += 0.12 * dt;
+        torus.rotation.z = mouseX * 0.6;
+
+        glowMesh.rotation.copy(torus.rotation);
+        // camera subtle parallax
+        camera.position.x += (mouseX*0.7 - camera.position.x) * 0.05;
+        camera.position.y += ( -mouseY*0.7 - camera.position.y) * 0.05;
+        camera.lookAt(0,0,0);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+
+      // small performance friendly particle background using canvas2D overlay
+      const particleCanvas = document.createElement('canvas');
+      particleCanvas.style.position='absolute';
+      particleCanvas.style.inset='0';
+      particleCanvas.style.pointerEvents='none';
+      particleCanvas.width = window.innerWidth * devicePixelRatio;
+      particleCanvas.height = window.innerHeight * devicePixelRatio;
+      particleCanvas.style.width = window.innerWidth + 'px';
+      particleCanvas.style.height = window.innerHeight + 'px';
+      document.body.appendChild(particleCanvas);
+      const pCtx = particleCanvas.getContext('2d');
+      const particles = [];
+      for(let i=0;i<60;i++){
+        particles.push({
+          x: Math.random()*particleCanvas.width,
+          y: Math.random()*particleCanvas.height,
+          r: Math.random()*0.9+0.6,
+          vx: (Math.random()-0.5)*0.45,
+          vy: (Math.random()-0.5)*0.25,
+          alpha: Math.random()*0.6+0.08
+        });
+      }
+      function particlesAnim(){
+        pCtx.clearRect(0,0,particleCanvas.width, particleCanvas.height);
+        for(const p of particles){
+          p.x += p.vx;
+          p.y += p.vy;
+          if(p.x<0) p.x = particleCanvas.width;
+          if(p.x>particleCanvas.width) p.x = 0;
+          if(p.y<0) p.y = particleCanvas.height;
+          if(p.y>particleCanvas.height) p.y = 0;
+          pCtx.beginPath();
+          const g = pCtx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*16);
+          g.addColorStop(0, 'rgba(139,92,246,' + (p.alpha) + ')');
+          g.addColorStop(1, 'rgba(91,33,182,0)');
+          pCtx.fillStyle = g;
+          pCtx.fillRect(p.x-p.r*16, p.y-p.r*16, p.r*32, p.r*32);
+        }
+        requestAnimationFrame(particlesAnim);
+      }
+      particlesAnim();
+
+    })();
+  </script><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas>
+
+
+</body></html>
