@@ -10,6 +10,22 @@
   <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 
   <style>
+
+
+.reveal {   
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+} 
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
     :root{
       --bg:#030308;
       --card:#0b0b12;
@@ -62,11 +78,55 @@
     .contact a{color:inherit;text-decoration:none}
     .skills{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
     .skill{background:var(--glass);padding:8px 10px;border-radius:10px;font-size:13px;color:#cfcff6;border:1px solid rgba(255,255,255,0.02)}
-    .download-btn{
+    .download-btn
+    {
       display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
       color:white;font-weight:600;border:none;cursor:pointer;box-shadow: 0 10px 30px rgba(91,33,182,0.18);
       text-decoration:none;
     }
+    
+    .download-btn {
+  position: relative;
+  overflow: hidden;
+  }
+
+  .download-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 300%;
+    top: -100%;
+    left: 0;
+    background: rgba(255,255,255,0.3);
+    transform: rotate(45deg);
+    animation: shine 5s infinite;
+  }
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(200%) rotate(45deg); }
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  transform: translateY(0); /* initial position */
+}
+
+.download-btn:hover {
+  transform: translateY(-6px) scale(1.05); /* move upward + slight zoom */
+  /*box-shadow: 0 6px 15px rgba(187, 0, 255, 0.5);  optional shadow */
+}
+
+    
 
     /* Right column (content) */
     .hero{
@@ -111,7 +171,20 @@
 
     /* Certifications list */
     .cert-list{display:flex;flex-direction:column;gap:10px}
-    .cert{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(90deg, rgba(139,92,246,0.02), transparent);border:1px solid rgba(139,92,246,0.03)}
+    .cert{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;
+      background:linear-gradient(90deg, rgba(139,92,246,0.02), transparent);
+      border:1px solid rgba(139,92,246,0.03)}
+   
+      .cert { 
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.cert:hover {
+  transform: translateY(-6px) scale(1.03); /* same pop-up effect */
+  box-shadow: 0 6px 15px rgba(187, 0, 255, 0.4); /* glowing shadow */
+}
 
     /* Footer / Contact */
     .contact-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
@@ -128,6 +201,22 @@
   <div class="container">
     <!-- LEFT: PROFILE -->
     <style>
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
   .glow-image {
     width: 600px;
     height: 180px;
@@ -155,6 +244,24 @@
 </style>
 
 <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
   .profile-photo {
     width: 100%;
     height: 600px;
@@ -173,6 +280,24 @@
 <div class="container">
   <!-- LEFT: PROFILE -->
   <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
   .profile-card {
     position: relative;
     z-index: 10; /* ensures the whole card is above background animation */
@@ -202,6 +327,14 @@
     object-fit: cover;
     display: block;
   }
+  .skill:hover {
+  background: #bb00ff;
+  color: white;
+  box-shadow: 0 0 10px #bb00ff;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
 </style>
 
 <aside class="profile-card">
@@ -254,11 +387,11 @@
     <!-- RIGHT: MAIN CONTENT -->
     <main>
       <!-- HERO -->
-      <section class="hero" aria-label="hero">
+      <section class="hero reveal" aria-label="hero">
         <div class="hero-left">
           
 
-          <h1 class="hero-h1" style="margin-top:14px">
+          <h1 class="hero-h1" style="margin-top:14px" id="typed-text">
             Hi, I'm <span class="accent">Shyam Patil</span><br>
             I turn data into stories &amp; dashboards.
           </h1>
@@ -274,6 +407,23 @@
 
         <div class="glow-lines" aria-hidden="true"></div>
     <style>
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
   @media (max-width: 768px) {
     .hero {
       display: flex;
@@ -293,7 +443,7 @@
       </section>
 
       <!-- ABOUT & PROJECTS -->
-      <section class="card" style="display:flex;gap:18px;flex-direction:column;">
+      <section class="card reveal" style="display:flex;gap:18px;flex-direction:column;">
         <div class="section-title">
           <div class="p-pill">About</div>
           <div style="color:var(--muted);font-size:13px">Short bio</div>
@@ -397,7 +547,7 @@
             <div style="width:8px;height:8px;border-radius:4px;background:var(--accent);margin-top:8px"></div>
             <div>
               <strong>Data Analyst Intern — Gray Corporates</strong>
-              <div class="muted">May–June 2024 — Advanced SQL queries and automated reporting (40% time saved).</div>
+              <div class="muted">May–June 2025 — Advanced SQL queries and automated reporting (40% time saved).</div>
             </div>
           </div>
         </div>
@@ -573,6 +723,35 @@
     })();
   </script><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas><canvas width="1910" height="922" style="position: absolute; inset: 0px; pointer-events: none; width: 1528px; height: 738px;"></canvas>
 
-  
+<script>// scrolling animation
+  const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach((section) => {
+    observer.observe(section);
+  });
+</script>
+
+<script>
+  const text = "Hi, I'm Shyam Patil\nI turn data into stories & dashboards.";
+  let index = 0;
+  function type() {
+    document.getElementById("typed-text").innerHTML = text.slice(0, index);
+    index++;
+    if (index <= text.length) {
+      setTimeout(type, 50);
+    }
+  }
+  type();
+  </script>  
+
 </body>
 </html>
