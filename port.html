@@ -198,9 +198,77 @@
   </style>
 </head>
 <body>
+  <!-- Vertical Navigation -->
+<nav class="sidebar">
+  <ul>
+    <li><a href="#hero"><b>Home</b></a></li>
+    <li><a href="#about"><b>About</b></a></li>
+    <li><a href="#projects"><b>Projects</b></a></li>
+    <li><a href="#certifications"><b>Certifications</b></a></li>
+    <li><a href="#experience"><b>Experience</b></a></li>
+    <li><a href="#contact"><b>Contact</b></a></li>
+  </ul>
+</nav>
+
+  
   <div class="container">
     <!-- LEFT: PROFILE -->
     <style>
+
+.p-pill {
+  font-size: 1.6rem;   /* bigger size */
+  font-weight: 700;    /* bold */
+  /*color: #bb00ff;   */   /* neon purple (matches theme) */
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+
+
+      html {
+  scroll-behavior: smooth;
+}
+
+      /* Sidebar Navigation */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 180px;
+  
+  padding-top: 40px;
+  
+  z-index: 1000;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin: 18px 0;
+}
+
+.sidebar ul li a {
+  color: #e9e9f8;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 14px;
+  display: block;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.sidebar ul li a:hover {
+  /*background: #bb00ff;*/
+  color: white;
+  transform: translateX(6px);
+}
+
 
 
 .reveal {
@@ -387,7 +455,7 @@
     <!-- RIGHT: MAIN CONTENT -->
     <main>
       <!-- HERO -->
-      <section class="hero reveal" aria-label="hero">
+      <section class="hero reveal" id = "hero" aria-label="hero">
         <div class="hero-left">
           
 
@@ -443,7 +511,7 @@
       </section>
 
       <!-- ABOUT & PROJECTS -->
-      <section class="card reveal" style="display:flex;gap:18px;flex-direction:column;">
+      <section class="card reveal" id = "about" style="display:flex;gap:18px;flex-direction:column;">
         <div class="section-title">
           <div class="p-pill">About</div>
           <div style="color:var(--muted);font-size:13px">Short bio</div>
@@ -454,7 +522,7 @@
 
         <div style="display:flex;gap:18px;flex-direction:column;margin-top:18px">
           <div>
-            <div class="section-title"><div class="p-pill">Projects</div><div class="muted">Selected work</div></div>
+            <div class="section-title" id = "projects"><div class="p-pill">Projects</div><div class="muted">Selected work</div></div>
             <div class="projects">
               <!-- Project 1 -->
               <div class="proj">
@@ -485,9 +553,9 @@
               </div>
             </div>
           </div>
-
+            <!--Certifications-->
           <div>
-            <div class="section-title"><div class="p-pill">Certifications</div><div class="muted">Verified</div></div>
+            <div class="section-title" id = "certifications"><div class="p-pill">Certifications</div><div class="muted">Verified</div></div>
             <div class="cert-list">
               <div class="cert"><div class="cert">
 <strong>
@@ -532,7 +600,7 @@
       </section>
 
       <!-- Experience / Contact -->
-      <section class="card" style="display:flex;flex-direction:column">
+      <section class="card" id = "experience" style="display:flex;flex-direction:column">
         <div class="section-title"><div class="p-pill">Experience</div><div class="muted">Internships</div></div>
         <div style="display:flex;flex-direction:column;gap:12px">
           <div style="display:flex;gap:12px;align-items:flex-start">
@@ -553,7 +621,7 @@
         </div>
 
         <div style="margin-top:18px">
-          <div class="section-title"><div class="p-pill">Contact</div><div class="muted">Get in touch</div></div>
+          <div class="section-title" id = "contact"><div class="p-pill">Contact</div><div class="muted">Get in touch</div></div>
           <div class="contact-row">
             <a class="contact-chip" href="mailto:shyamvidyadharpatil1234@gmail.com" title="Email">
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
