@@ -236,7 +236,7 @@
   left: 0;
   height: 100%;
   width: 180px;
-  
+  background: linear-gradient(180deg, #0a0a0a, #1e1e2f);
   padding-top: 40px;
   
   z-index: 1000;
@@ -268,8 +268,28 @@
   color: white;
   transform: translateX(6px);
 }
+/*temperory*/
+.container {
+  margin-left: 100px; /* more space from sidebar */
+  margin-right: -80px;
+}
 
+/*.hero {
+  margin-left: 80px; /* shifts hero to the right 
+  margin-right: 0px;
+  padding: 40px 20px;
+}*/
+/* Shift all sections consistently */
+.hero,
+#about,
+#experience 
+{
+  margin-left: 100px;   /* same shift as hero */
+  margin-right: -100px; /* balances layout on right */
+  padding: 40px 20px;  /* inner spacing */
+}
 
+/* temp */
 
 .reveal {
   opacity: 0;
