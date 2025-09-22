@@ -171,7 +171,27 @@
 
     /* Certifications list */
 
-    
+    .cert-list {
+  max-height: 220px;       /* fixed height for certificate box */
+  overflow-y: auto;        /* enable vertical scroll */
+  padding-right: 10px;
+  scrollbar-width: thin;   /* slim scrollbar (Firefox) */
+  scrollbar-color: #bb00ff #1e1e2f; /* purple thumb, dark bg */
+}
+
+.cert-list::-webkit-scrollbar {
+  width: 6px;              /* slim scrollbar (Chrome/Edge) */
+}
+
+.cert-list::-webkit-scrollbar-thumb {
+  background: #bb00ff;     /* scrollbar color */
+  border-radius: 4px;
+}
+
+.cert-list::-webkit-scrollbar-track {
+  background: #1e1e2f;     /* scrollbar track */
+}
+
 
     .cert-list{display:flex;flex-direction:column;gap:10px}
     .cert{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;
@@ -586,7 +606,7 @@
     Python for Data Science, AI &amp; Development
   </a>
 </strong>
-<div class="muted" style="margin-left:auto">IBM</div>
+<div class="muted" style="margin-left:auto"></div>
 </div>
 <div class="muted" style="margin-left:auto">IBM</div></div>
               <div class="cert"><div class="cert">
@@ -595,7 +615,7 @@
     Python Project for Data Science
   </a>
 </strong>
-<div class="muted" style="margin-left:auto">IBM</div>
+<div class="muted" style="margin-left:auto"></div>
 </div>
 <div class="muted" style="margin-left:auto">IBM</div></div>
               <div class="cert"><div class="cert">
@@ -604,7 +624,7 @@
     Excel Basics for Data Analysis
   </a>
 </strong>
-<div class="muted" style="margin-left:auto">IBM</div>
+<div class="muted" style="margin-left:auto"></div>
 </div>
 <div class="muted" style="margin-left:auto">IBM</div></div>
               <div class="cert"><div class="cert">
@@ -613,7 +633,7 @@
     Data Analytics Job Simulation
   </a>
 </strong>
-<div class="muted" style="margin-left:auto">Forage</div>
+<div class="muted" style="margin-left:auto"></div>
 </div>
 <div class="muted" style="margin-left:auto">Deloitte Australia (Forage)</div></div>
 
@@ -625,7 +645,7 @@
       Microsoft SQL Certification Training
     </a>
   </strong>
-  <div class="muted" style="margin-left:auto">Intellipaat</div>
+  <div class="muted" style="margin-left:auto"></div>
 </div>
 <div class="muted" style="margin-left:auto">Intellipaat</div></div>
 
@@ -860,3 +880,4 @@
 
 </body>
 </html>
+
